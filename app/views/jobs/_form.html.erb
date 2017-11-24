@@ -1,0 +1,46 @@
+<%= form_for @job do |f| %>
+
+<fieldset>
+  <%= f.label :summary %>
+  <%= f.text_field :summary %>
+</fieldset>
+<fieldset>
+  <%= f.label :detail %>
+  <%= f.text_field :detail %>
+</fieldset>
+<fieldset>
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+</fieldset>
+<fieldset>
+  <%= f.label :requested_date %>
+  <%= f.text_field :requested_date %>
+</fieldset>
+<fieldset>
+  <%= f.label :accepted_date %>
+  <%= f.text_field :accepted_date %>
+</fieldset>
+<fieldset>
+  <%= f.label :finished %>
+  <%= f.text_field :finished %>
+</fieldset>
+
+<fieldset>
+  <%= f.label :booker_id %>
+  <%= f.select :booker_id, Booker.pluck(:name, :id), :include_blank => true %>
+</fieldset>
+
+
+<fieldset>
+  <%= f.label :technician_id %>
+  <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true %>
+</fieldset>
+
+
+
+<fieldset>
+<label></label>
+  <%= f.submit %>
+</fieldset>
+
+<% end %>

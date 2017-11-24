@@ -1,2 +1,20 @@
 <h1>Jobs#show</h1>
 <p>Find me in app/views/jobs/show.html.erb</p>
+
+<ul>
+  <li><%= @job.summary %> /</li>
+  <li><%= @job.detail %> /</li>
+  <li><%= @job.address %> /</li>
+  <li><%= @job.requested_date %> /</li>
+  <li><%= @job.accepted_date %> /</li>
+  <li><%= @job.finished %> /</li>
+  <li><%= @job.booker_id %> /</li>
+  <li><%= @job.technician_id %> / </li>
+</ul>
+
+
+<div class="controls">
+  <%= link_to 'Delete Job', @job, :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
+  <%= link_to "Edit Job", edit_job_path(@job) %>
+
+</div>
