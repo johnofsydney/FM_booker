@@ -2,16 +2,14 @@
 <p>Find me in app/views/jobs/show.html.erb</p>
 
 <ul>
-  <li><%= @job.summary %> /</li>
-  <li><%= @job.detail %> /</li>
-  <li><%= @job.address %> /</li>
-  <li><%= @job.requested_date %> /</li>
-  <li><%= @job.accepted_date %> /</li>
-  <li><%= @job.finished %> /</li>
-  <li><%= @job.booker_id %> /</li>
+  <h3><%= @job.summary %></h3>
+  <li>Info: <%= @job.detail %></li>
+  <li>Address: <%= @job.address %></li>
+  <li>Requested Date: <%= @job.requested_date %></li>
+  <li>Planned Date: <%= @job.accepted_date %></li>
+  <li>Completed? :<%= @job.finished %></li>
   <li>Booker: <%= @job.booker.name %></li>
-  <li><%= @job.technician_id %> / </li>
-  <li>Technician: <%= @job.technician.name %> / </li>
+  <li>Technician: <%= @job.technician.name %></li>
 </ul>
 
 

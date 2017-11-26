@@ -1,17 +1,40 @@
 <h1>Jobs#index</h1>
 <p>Find me in app/views/jobs/index.html.erb</p>
 
-<div class="">
-  <% @jobs.each do |job| %>
-  <ul>
-    <h3><%= job.summary %></h3>
-    <li><%= job.detail %></li>
-    <li><%= job.address %></li>
-    <li><%= job.requested_date %></li>
-    <li><%= job.accepted_date %></li>
-    <li><%= job.finished %></li>
-    <li><%= job.booker_id %></li>
-    <li><%= job.technician_id %></li>
-  </ul>
+
+<% @jobs.each do |job| %>
+
+<% class_words = "job "  %>
+
+<% if job.accepted_date == nil %>
+  <% class_words = class_words + "allocated " %>
+<% else %>
+  <% class_words = class_words + "unallocated " %>
+<% end %>
+
+<% if job.finished == true %>
+  <% class_words = class_words + "closed " %>
+<% else %>
+  <% class_words = class_words + "open " %>
+<% end %>
+
+
+
+<% class_words = class_words.split(" ") %>
+
+  <%= tag("div", class: class_words) %>
+    <ul>
+      <h3><%= link_to job.summary, job %></h3>
+      <li>Info: <%= job.detail %></li>
+      <li>Address: <%= job.address %></li>
+      <li>Requested Date: <%= job.requested_date %></li>
+      <li>Planned Date<%= job.accepted_date %></li>
+      <li>Completed? <%= job.finished %></li>
+      <li>Booker: <%= job.booker.name %></li>
+      <li>Technician: <%= job.technician.name %></li>
+    </ul>
+    <%= link_to "Edit Job", job %>
+  </div>
+
+
   <% end %>
-</div>
