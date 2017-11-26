@@ -23,6 +23,7 @@
 <% class_words = class_words.split(" ") %>
 
   <%= tag("div", class: class_words) %>
+  <!-- <div class="<%= class_words %>"> -->
     <ul>
       <h3><%= link_to job.summary, job %></h3>
       <li>Info: <%= job.detail %></li>
