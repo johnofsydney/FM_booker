@@ -20,6 +20,7 @@
           <%= link_to "All Jobs", jobs_path %>
           <%= link_to "Sign Out #{ @current_user.email }", login_path, :method => 'delete' %>
           <%= "Logged in as #{ @current_user.name }" %>
+          <%= "@current_user type #{ session[:user_type]}" %>
         <% else %>
 
           <%= link_to 'Sign In', login_path %>
@@ -28,7 +29,7 @@
 
     <div class="main">
       <% if @current_user.present? %>
-
+        
       <% else %>
         <p>This is John's Booking database for Facilities Manitenance. You are not loged in, so this brief explanation is displayed for you.</p>
         <p>The central piece of the database is the "Job" A Job is booked by a booker and attended by a technician. It has a requested date and an address, and has some similarities with Uber I suppose.</p>

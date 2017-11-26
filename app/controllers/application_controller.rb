@@ -7,8 +7,15 @@ class ApplicationController < ActionController::Base
 
   private
   def fetch_user
-    @current_user = Booker.find_by :id => session[:user_id] if session[:user_id].present?
-    session[:user_id] = nil unless @current_user.present?
+    if session[:user_type] == "booker"
+      @current_user = Booker.find_by :id => session[:user_id] if session[:user_id].present?
+      session[:user_id] = nil unless @current_user.present?
+    elsif session[:user_type] == "technician"
+      @current_user = Technician.find_by :id => session[:user_id] if session[:user_id].present?
+      session[:user_id] = nil unless @current_user.present?
+    else
+    end
+
   end
 
   def check_if_logged_in

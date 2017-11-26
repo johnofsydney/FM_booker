@@ -10,5 +10,13 @@
   <%= label_tag :password %>
   <%= password_field_tag :password %>
 
+
+<%= radio_button_tag(:type, "booker") %>
+<%= label_tag(:type_booker, "Booker") %>
+<%= radio_button_tag(:type, "technician") %>
+<%= label_tag(:type_technician, "Technician") %>
+
+
+
   <%= submit_tag "Login" %>
 <% end %>
