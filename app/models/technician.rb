@@ -10,5 +10,8 @@
 #
 
 class Technician < ApplicationRecord
-  has_many :jobs 
+  has_secure_password
+  has_many :jobs
+
+  validates :email, :presence => true, :uniqueness => true
 end

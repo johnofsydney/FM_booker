@@ -15,9 +15,18 @@ Rails.application.routes.draw do
 
 
 
+  # get 'session/new' - #think this is one of those things that I should have deleted.
+
   root :to => "pages#home"
 
   resources :jobs, :only => [:index, :new, :create, :edit, :update, :show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
+  # This session struff is different. Start with booker and see how we go...
+  get '/login' => 'session#new'
+  post '/login' => 'session#create'
+  delete '/login' => 'session#destroy'
+
 end

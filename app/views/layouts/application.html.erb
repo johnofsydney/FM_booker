@@ -11,9 +11,35 @@
   <body>
 
     <nav>
-      <%= link_to "New Job", new_job_path %>
-    </nav>
 
+      <nav>
+        <%= link_to 'Home', root_path %>
+        <% if @current_user.present? %>
+
+          <%= link_to "New Job", new_job_path %>
+          <%= link_to "All Jobs", jobs_path %>
+          <%= link_to "Sign Out #{ @current_user.email }", login_path, :method => 'delete' %>
+          <%= "Logged in as #{ @current_user.name }" %>
+        <% else %>
+
+          <%= link_to 'Sign In', login_path %>
+        <% end %>
+      </nav>
+
+    <div class="main">
+      <% if @current_user.present? %>
+
+      <% else %>
+        <p>This is John's Booking database for Facilities Manitenance. You are not loged in, so this brief explanation is displayed for you.</p>
+        <p>The central piece of the database is the "Job" A Job is booked by a booker and attended by a technician. It has a requested date and an address, and has some similarities with Uber I suppose.</p>
+        <p>Some points worth noting about Users - </p>
+        <ul>
+          <li>This is more of a corporate tool than a mass user database. You can't sign yourself up as a new user, either a booker or a technician - a new user must be added by an admin member.</li>
+          <li>Whilst the above does make @users a bit simpler, the rtrade off is that there is two tables of users - bookers and technicians to cater for.</li>
+        </ul>
+      <% end %>
+
+    </div>
 
     <%= yield %>
   </body>
