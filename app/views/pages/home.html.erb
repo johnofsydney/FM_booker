@@ -2,8 +2,7 @@
 <div class="main">
   <% if @current_user.present? %>
     <h1>Welcome to the SERVICE JOB BOOKING DATABASE.</h1>
-    <h3>You are logged in as <%= "#{ @current_user.name }" %> </h3>
-    <h3>With job function of <%= "#{ session[:user_type].capitalize}" %></h3>
+    <h3>You are logged in as <%= "#{ @current_user.name }" %> (<%= "#{ session[:user_type].capitalize}"%>)</h3>
 
     <p>All available actions are in the nav bar.</p>
 

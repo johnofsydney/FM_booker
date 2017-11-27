@@ -8,7 +8,7 @@
 
 <% @jobs.each do |job| %>
 
-  <% class_words = "job "  %>
+  <% class_words = "job col-md-4 "  %>
 
   <% if job.accepted_date == nil %>
     <% class_words = class_words + "unallocated " %>
@@ -30,7 +30,7 @@
   <!-- <div class="<%= class_words %>"> -->
     <ul>
       <h3><%= link_to job.summary, job %></h3>
-      <li>Info: <%= job.detail %></li>
+      <!-- <li>Info: <%= job.detail %></li> -->
       <li>Address: <%= job.address %></li>
       <li>Requested Date: <%= job.requested_date %></li>
       <li>Planned Date: <%= job.accepted_date %></li>
@@ -45,7 +45,7 @@
 
 
     </ul>
-    <%= link_to "Edit Job", job %>
+    <!-- <%= link_to "Edit Job", job %> -->
   </div>
 
   <!-- waypoints specifies one or more intermediary places to route directions through between the origin and destination. Multiple waypoints can be specified by using the pipe character (|) to separate places (e.g. Berlin,Germany|Paris,France). You can specify up to 20 waypoints. Each waypoint can be either a place name, address or place ID.

@@ -37,13 +37,18 @@
   <div class="form-group">
     <%= f.label :technician_id %>
     <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true, class: "dropdown-menu" %>
-    
+
   </select>
 
   <div class="form-group">
     <label></label>
     <%= f.submit :class => 'btn btn-info'  %>
   </div>
+
+  <!-- <fieldset>
+<label></label>
+  <%= f.submit %>
+</fieldset> -->
 
 
 
