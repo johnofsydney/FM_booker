@@ -1,0 +1,18 @@
+<h1>Technicians#index</h1>
+<p>Find me in app/views/technicians/index.html.erb</p>
+
+
+<h1>All Technicians</h1>
+
+<% @technicians.each do |technician| %>
+
+
+  <ul>
+    <li><%= link_to technician.name, technician%></li>
+    <!-- min code would be
+    link_to artist.name artist_path(artist) or
+    link_to artist.name artist -->
+
+  </ul>
+
+<% end  %>

@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   root :to => "pages#home"
 
   resources :jobs, :only => [:index, :new, :create, :edit, :update, :show]
+  resources :technicians, :only => [:index, :new, :create, :edit, :update, :show]
+  # resources :bookers, :only => [:index, :new, :create, :edit, :update, :show]
+  # rails generate controller Technicians index new create edit update show delete
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

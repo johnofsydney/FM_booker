@@ -2,14 +2,14 @@
 <p>Find me in app/views/jobs/index.html.erb</p>
 
 
-<% @gAPIKey = "AIzaSyB7nJABK2HEiQKo4V-FCEMWX5xag8vVJeA" %>
-<% waypoints = "&waypoints=" %>
 
 
+<!-- can get rid of this... -->
 <!-- <% @jobs.sort_by(&:accepted_date) %> -->
 <% @jobs = @jobs.sort_by{ |t| t.accepted_date  } %>
 <% address_first = @jobs.first.address %>
 <% address_last = @jobs.last.address %>
+<!-- can get rid of this... -->
 
 
 <% @jobs.each do |job| %>
@@ -49,27 +49,7 @@
 
   <!-- waypoints specifies one or more intermediary places to route directions through between the origin and destination. Multiple waypoints can be specified by using the pipe character (|) to separate places (e.g. Berlin,Germany|Paris,France). You can specify up to 20 waypoints. Each waypoint can be either a place name, address or place ID.
    -->
-  <% if @jobs.length < 3 %>
-    <% waypoints = "" %> <!-- There are no waypoints. destroy the string -->
-  <% else %>
-    <% if job.id == @jobs.first.id %>   <!-- Dont add first job to waypoints -->
-    <% elsif job.id == @jobs.last.id %> <!-- Dont add last job to waypoints -->
-    <% else %>
-      <% waypoints = waypoints  + job.address + "|" %>
-    <% end %>
-  <% end %>
+
 
 
 <% end %>
-
-<% if waypoints != "" %>
-  <% waypoints = waypoints.chop %>  <!-- deletes the last character, which is always | -->
-<% end %>
-
-
-
-<% @gmapURL = "https://www.google.com/maps/embed/v1/directions?key=" + @gAPIKey + "&origin=" + address_first + "&destination=" + address_last + waypoints%>
-
-
-
-  <iframe width="600" height="450" frameborder="0" style="border:0" src="<%= @gmapURL %>" allowfullscreen></iframe>
