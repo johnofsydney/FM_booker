@@ -3,6 +3,10 @@ class JobsController < ApplicationController
     @jobs = Job.all
   end
 
+  def unallocated
+    @jobs = Job.where('accepted_date'=>nil)
+  end
+
   def new
     @job = Job.new
   end

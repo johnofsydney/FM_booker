@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   root :to => "pages#home"
 
+  get '/jobs/unallocated' => 'jobs#unallocated'
+
   resources :jobs, :only => [:index, :new, :create, :edit, :update, :show]
   resources :technicians, :only => [:index, :new, :create, :edit, :update, :show]
   # resources :bookers, :only => [:index, :new, :create, :edit, :update, :show]

@@ -1,7 +1,4 @@
-<h1>Technicians#show</h1>
-<p>Find me in app/views/technicians/show.html.erb</p>
-
-<h1><%= @technician.name %></h1>
+<h1>Open Jobs for <%= @technician.name %></h1>
 
 <% class_words = "testing" %>
 <!-- <% class_words = class_words.split(" ") %> -->
@@ -11,47 +8,61 @@
 
 <!-- <% @technician.jobs.sort_by(&:accepted_date) %> -->
 <% jobs = @technician.jobs %>
+<!-- need to filter toedclude fibnished jobs -->
 <% jobs = jobs.sort_by{ |t| t.accepted_date  } %>
 <% address_first = jobs.first.address %>
 <% address_last = jobs.last.address %>
 
-<% jobs.each do |job| %>
+<div class="row">
 
-  <%= tag("div", class: class_words) %>
-  <!-- <div class="<%= class_words %>"> -->
-    <ul>
-      <h3><%= link_to job.summary, job %></h3>
-      <li>Info: <%= job.detail %></li>
-      <li>Address: <%= job.address %></li>
-      <li>Requested Date: <%= job.requested_date %></li>
-      <li>Planned Date: <%= job.accepted_date %></li>
-      <li>Completed? <%= job.finished %></li>
-      <li>Booker: <%= job.booker.name %></li>
-      <li>Technician: <%= job.technician.name %></li>
-    </ul>
+  <div class="col-md-4">
+
+
+    <% jobs.each do |job| %>
+
+      <%= tag("div", class: class_words) %>
+      <!-- <div class="<%= class_words %>"> -->
+        <ul>
+          <h3><%= link_to job.summary, job %></h3>
+          <li>Info: <%= job.detail %></li>
+          <li>Address: <%= job.address %></li>
+          <li>Requested Date: <%= job.requested_date %></li>
+          <li>Planned Date: <%= job.accepted_date %></li>
+          <li>Completed? <%= job.finished %></li>
+          <li>Booker: <%= job.booker.name %></li>
+          <li>Technician: <%= job.technician.name %></li>
+        </ul>
+      </div>
+
+      <% if jobs.length < 3 %>
+        <% waypoints = "" %> <!-- There are no waypoints. destroy the string -->
+      <% else %>
+        <% if job.id == jobs.first.id %>   <!-- Dont add first job to waypoints -->
+        <% elsif job.id == jobs.last.id %> <!-- Dont add last job to waypoints -->
+        <% else %>
+          <% waypoints = waypoints  + job.address + "|" %>
+        <% end %>
+      <% end %>
+
+    <% end %>
+
+
+  </div>
+  <div class="col-md-8">
+
+    <% if waypoints != "" %>
+      <% waypoints = waypoints.chop %>  <!-- deletes the last character, which is always | -->
+    <% end %>
+
+
+
+    <% @gmapURL = "https://www.google.com/maps/embed/v1/directions?key=" + @gAPIKey + "&origin=" + address_first + "&destination=" + address_last + waypoints%>
+
+
+
+      <iframe width="600" height="450" frameborder="0" style="border:0" src="<%= @gmapURL %>" allowfullscreen></iframe>
+
   </div>
 
-  <% if jobs.length < 3 %>
-    <% waypoints = "" %> <!-- There are no waypoints. destroy the string -->
-  <% else %>
-    <% if job.id == jobs.first.id %>   <!-- Dont add first job to waypoints -->
-    <% elsif job.id == jobs.last.id %> <!-- Dont add last job to waypoints -->
-    <% else %>
-      <% waypoints = waypoints  + job.address + "|" %>
-    <% end %>
-  <% end %>
 
-<% end %>
-
-
-<% if waypoints != "" %>
-  <% waypoints = waypoints.chop %>  <!-- deletes the last character, which is always | -->
-<% end %>
-
-
-
-<% @gmapURL = "https://www.google.com/maps/embed/v1/directions?key=" + @gAPIKey + "&origin=" + address_first + "&destination=" + address_last + waypoints%>
-
-
-
-  <iframe width="600" height="450" frameborder="0" style="border:0" src="<%= @gmapURL %>" allowfullscreen></iframe>
+</div>  <!-- end of div class row -->

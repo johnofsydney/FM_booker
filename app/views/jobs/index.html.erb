@@ -4,12 +4,6 @@
 
 
 
-<!-- can get rid of this... -->
-<!-- <% @jobs.sort_by(&:accepted_date) %> -->
-<% @jobs = @jobs.sort_by{ |t| t.accepted_date  } %>
-<% address_first = @jobs.first.address %>
-<% address_last = @jobs.last.address %>
-<!-- can get rid of this... -->
 
 
 <% @jobs.each do |job| %>

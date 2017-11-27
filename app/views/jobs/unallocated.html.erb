@@ -1,0 +1,27 @@
+<h2>Unallocated</h2>
+<h3>in app/view/jobs/unallocated.html.erb</h3>
+
+
+
+<% @jobs.each do |job| %>
+
+
+
+  <%= tag("div") %>
+
+    <ul>
+      <h3><%= link_to job.summary, job %></h3>
+      <li>Info: <%= job.detail %></li>
+      <li>Address: <%= job.address %></li>
+      <li>Requested Date: <%= job.requested_date %></li>
+      <li>Planned Date: <%= job.accepted_date %></li>
+      <li>Completed? <%= job.finished %></li>
+      <li>Booker: <%= job.booker.name %></li>
+      <li>Technician: <%= job.technician.name %></li>
+    </ul>
+    <%= link_to "Edit Job", job %>
+  </div>
+
+
+
+<% end %>
