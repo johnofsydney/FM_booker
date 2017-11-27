@@ -2,25 +2,35 @@
 <p>Find me in app/views/jobs/index.html.erb</p>
 
 
+<% @gAPIKey = "AIzaSyB7nJABK2HEiQKo4V-FCEMWX5xag8vVJeA" %>
+<% waypoints = "&waypoints=" %>
+
+
+<!-- <% @jobs.sort_by(&:accepted_date) %> -->
+<% @jobs = @jobs.sort_by{ |t| t.accepted_date  } %>
+<% address_first = @jobs.first.address %>
+<% address_last = @jobs.last.address %>
+
+
 <% @jobs.each do |job| %>
 
-<% class_words = "job "  %>
+  <% class_words = "job "  %>
 
-<% if job.accepted_date == nil %>
-  <% class_words = class_words + "allocated " %>
-<% else %>
-  <% class_words = class_words + "unallocated " %>
-<% end %>
+  <% if job.accepted_date == nil %>
+    <% class_words = class_words + "unallocated " %>
+  <% else %>
+    <% class_words = class_words + "allocated " %>
+  <% end %>
 
-<% if job.finished == true %>
-  <% class_words = class_words + "closed " %>
-<% else %>
-  <% class_words = class_words + "open " %>
-<% end %>
+  <% if job.finished == true %>
+    <% class_words = class_words + "closed " %>
+  <% else %>
+    <% class_words = class_words + "open " %>
+  <% end %>
 
 
 
-<% class_words = class_words.split(" ") %>
+  <% class_words = class_words.split(" ") %>
 
   <%= tag("div", class: class_words) %>
   <!-- <div class="<%= class_words %>"> -->
@@ -29,7 +39,7 @@
       <li>Info: <%= job.detail %></li>
       <li>Address: <%= job.address %></li>
       <li>Requested Date: <%= job.requested_date %></li>
-      <li>Planned Date<%= job.accepted_date %></li>
+      <li>Planned Date: <%= job.accepted_date %></li>
       <li>Completed? <%= job.finished %></li>
       <li>Booker: <%= job.booker.name %></li>
       <li>Technician: <%= job.technician.name %></li>
@@ -37,5 +47,30 @@
     <%= link_to "Edit Job", job %>
   </div>
 
-
+  <!-- waypoints specifies one or more intermediary places to route directions through between the origin and destination. Multiple waypoints can be specified by using the pipe character (|) to separate places (e.g. Berlin,Germany|Paris,France). You can specify up to 20 waypoints. Each waypoint can be either a place name, address or place ID.
+   -->
+  <% if @jobs.length < 3 %>
+    <% waypoints = "" %> <!-- There are no waypoints. destroy the string -->
+  <% else %>
+    <% if job.id == @jobs.first.id %> <!-- Dont add first job to waypoints -->
+    <% elsif job.id == @jobs.last.id %> <!-- Dont add last job to waypoints -->
+    <% else %>
+      <% waypoints = waypoints  + job.address + "|" %>
+    <% end %>
   <% end %>
+
+
+<% end %>
+
+<% if waypoints != "" %>
+  <% waypoints = waypoints.chop %>  <!-- deletes the last character, which is always | -->
+<% end %>
+
+
+  <!-- <iframe width="1200" height="800" frameborder="0" style="border:0" src="<%= @gmapURL1 %>" allowfullscreen="allowfullscreen"></iframe>
+   -->
+<% @gmapURL = "https://www.google.com/maps/embed/v1/directions?key=" + @gAPIKey + "&origin=" + address_first + "&destination=" + address_last + waypoints%>
+
+
+
+  <iframe width="600" height="450" frameborder="0" style="border:0" src="<%= @gmapURL %>" allowfullscreen></iframe>

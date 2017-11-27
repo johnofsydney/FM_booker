@@ -1,2 +1,26 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<div class="main">
+  <% if @current_user.present? %>
+
+  <% else %>
+    <p>This is John's Booking database for Facilities Manitenance. You are not logged in, so this brief explanation is displayed for you.</p>
+    <p>The central piece of the database is the "Job" A Job is booked by a booker and attended by a technician. It has a requested date and an address, and has some similarities with Uber I suppose.</p>
+    <p>There are two seperate twbles for users - BOOKERS and TECHNICIANS, which are linked to each other only via the JOBS table.</p>
+    <ul>BOOKERS
+      <li>peter@ga.co / chicken</li>
+      <li>jane@ga.co / chicken</li>
+    </ul>
+    <ul>TECHNICIANS
+      <li>stephen@ga.co / chicken</li>
+      <li>gillian@ga.co / chicken</li>
+    </ul>
+    <p>Some points worth noting about Users - </p>
+    <ul>
+      <li>This is more of a corporate tool than a mass user database. You can't sign yourself up as a new user, either a booker or a technician - a new user must be added by an admin member.</li>
+      <li>Whilst the above does make @users a bit simpler, the trade off is that there is two tables of users - bookers and technicians to cater for.</li>
+    </ul>
+  <% end %>
+
+</div>

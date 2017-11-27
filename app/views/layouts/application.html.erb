@@ -31,11 +31,11 @@
       <% end %>
     </nav>
 
-    <div class="main">
+    <!-- <div class="main">
       <% if @current_user.present? %>
 
       <% else %>
-        <p>This is John's Booking database for Facilities Manitenance. You are not loged in, so this brief explanation is displayed for you.</p>
+        <p>This is John's Booking database for Facilities Manitenance. You are not logged in, so this brief explanation is displayed for you.</p>
         <p>The central piece of the database is the "Job" A Job is booked by a booker and attended by a technician. It has a requested date and an address, and has some similarities with Uber I suppose.</p>
         <p>There are two seperate twbles for users - BOOKERS and TECHNICIANS, which are linked to each other only via the JOBS table.</p>
         <ul>BOOKERS
@@ -53,7 +53,7 @@
         </ul>
       <% end %>
 
-    </div>
+    </div> -->
 
     <%= yield %>
   </body>
