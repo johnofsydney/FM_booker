@@ -3,6 +3,10 @@
 
 <div class="main">
   <% if @current_user.present? %>
+    <h1>Welcome <%= "#{ @current_user.name }" %></h1>
+    <h3>You are logged into the <i>Job Booking Database</i> as a <%= "#{ session[:user_type].capitalize}" %></h3>
+
+    <p>All available actions are in the nav bar.</p>
 
   <% else %>
     <p>This is John's Booking database for Facilities Manitenance. You are not logged in, so this brief explanation is displayed for you.</p>

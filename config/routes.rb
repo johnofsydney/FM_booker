@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
-  # This session struff is different. Start with booker and see how we go...
+  # This session stuff is different. Start with booker and see how we go...
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'

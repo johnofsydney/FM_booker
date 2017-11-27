@@ -52,7 +52,7 @@
   <% if @jobs.length < 3 %>
     <% waypoints = "" %> <!-- There are no waypoints. destroy the string -->
   <% else %>
-    <% if job.id == @jobs.first.id %> <!-- Dont add first job to waypoints -->
+    <% if job.id == @jobs.first.id %>   <!-- Dont add first job to waypoints -->
     <% elsif job.id == @jobs.last.id %> <!-- Dont add last job to waypoints -->
     <% else %>
       <% waypoints = waypoints  + job.address + "|" %>
@@ -67,8 +67,7 @@
 <% end %>
 
 
-  <!-- <iframe width="1200" height="800" frameborder="0" style="border:0" src="<%= @gmapURL1 %>" allowfullscreen="allowfullscreen"></iframe>
-   -->
+
 <% @gmapURL = "https://www.google.com/maps/embed/v1/directions?key=" + @gAPIKey + "&origin=" + address_first + "&destination=" + address_last + waypoints%>
 
 
