@@ -9,6 +9,8 @@ class JobsController < ApplicationController
 
   def new
     @job = Job.new
+    # @technicians = Technician.all
+    # @bookers = Booker.all
   end
 
   def create
@@ -19,6 +21,8 @@ class JobsController < ApplicationController
 
   def edit
     @job = Job.find params[:id]
+    # @technicians = Technician.all
+    # @bookers = Booker.all
   end
 
   def update

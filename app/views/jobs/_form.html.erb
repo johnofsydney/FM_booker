@@ -1,46 +1,51 @@
 <%= form_for @job do |f| %>
 
-<fieldset>
-  <%= f.label :summary %>
-  <%= f.text_field :summary %>
-</fieldset>
-<fieldset>
-  <%= f.label :detail %>
-  <%= f.text_field :detail %>
-</fieldset>
-<fieldset>
-  <%= f.label :address %>
-  <%= f.text_field :address %>
-</fieldset>
-<fieldset>
-  <%= f.label :requested_date %>
-  <%= f.text_field :requested_date %>
-</fieldset>
-<fieldset>
-  <%= f.label :accepted_date %>
-  <%= f.text_field :accepted_date %>
-</fieldset>
-<fieldset>
-  <%= f.label :finished %>
-  <%= f.text_field :finished %>
-</fieldset>
 
-<fieldset>
-  <%= f.label :booker_id %>
-  <%= f.select :booker_id, Booker.pluck(:name, :id), :include_blank => true %>
-</fieldset>
+  <div class="form-group">
+    <%= f.label :summary %>
+    <%= f.text_field :summary, :class => 'form-control'  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :detail %>
+    <%= f.text_field :detail, :class => 'form-control'  %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_field :address, :class => 'form-control'   %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :requested_date %>
+    <%= f.text_field :requested_date, :class => 'form-control'   %>
+  </div>
+  <div class="form-group">
+    <%= f.label :accepted_date %>
+    <%= f.text_field :accepted_date, :class => 'form-control'   %>
+  </div>
+  <div class="form-group">
+    <%= f.label :finished %>
+    <%= f.text_field :finished, :class => 'form-control'   %>
+  </div>
+
+  <div class="dropdown">
+    <%= f.label :booker_id %>
+    <%= f.select :booker_id, options_for_select(Booker.pluck(:name, :id)), :include_blank => true, :selected => session[:user_id], :class => 'dropdown-menu'  %>
+  </div>`
+
+  <div class="form-group">
+    <%= f.label :technician_id %>
+    <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true, class: "dropdown-menu" %>
+    
+  </select>
+
+  <div class="form-group">
+    <label></label>
+    <%= f.submit :class => 'btn btn-info'  %>
+  </div>
 
 
-<fieldset>
-  <%= f.label :technician_id %>
-  <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true %>
-</fieldset>
 
-
-
-<fieldset>
-<label></label>
-  <%= f.submit %>
-</fieldset>
 
 <% end %>

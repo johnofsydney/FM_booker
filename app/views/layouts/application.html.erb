@@ -12,9 +12,10 @@
 
     <div class="container">
 
-      <nav>
+      <!-- <nav>
         <%= link_to 'Home', root_path %>
-        <% if @current_user.present? %> <!-- someone is logged in -->
+        <% if @current_user.present? %>
+
           <% if session[:user_type] == "booker" %>
             <%= "BOOKER" -%>
             <%= link_to "New Job", new_job_path %>
@@ -28,10 +29,10 @@
           <%= link_to "Sign Out (#{ @current_user.name })", login_path, :method => 'delete' %>
 
 
-        <% else %> <!-- user is not logged in -->
+        <% else %> 
           <%= link_to 'Sign In', login_path %>
         <% end %>
-      </nav>
+      </nav> -->
 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -43,14 +44,27 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <!-- <a class="navbar-brand" href="root_path">FM_Booker</a> -->
+            <%= link_to 'FM_Booker', root_path, :class => "navbar-brand" %>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Link</a></li>
+              <% if @current_user.present? %> <!-- someone is logged in -->
+                <% if session[:user_type] == "booker" %>
+                  <!-- <%= "BOOKER" -%> -->
+                  <li><%= link_to "New Job", new_job_path %></li>
+                  <li><%= link_to "All Jobs", jobs_path %></li>
+                <% elsif session[:user_type] == "technician"%>
+                  <!-- <%= "TECHNICIAN" -%> -->
+                  <li><%= link_to "Unallocated Jobs", jobs_unallocated_path %></li>
+                  <li><%= link_to "My Jobs", technician_path(session[:user_id]) %></li>
+                <% end %>
+              <% end %>
+
+              <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">Link</a></li> -->
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -71,7 +85,7 @@
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Link</a></li>
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -82,6 +96,14 @@
                   <li><a href="#">Separated link</a></li>
                 </ul>
               </li>
+
+              <% if @current_user.present? %> <!-- someone is logged in -->
+                <li><%= link_to "Sign Out (#{ @current_user.name })", login_path, :method => 'delete' %></li>
+              <% else %> <!-- user is not logged in -->
+                <li><%= link_to 'Sign In', login_path %></li>
+              <% end %>
+
+              <!-- <li><a href="#">Link</a></li> -->
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

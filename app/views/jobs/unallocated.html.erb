@@ -1,6 +1,4 @@
-<h2>Unallocated</h2>
-<h3>in app/view/jobs/unallocated.html.erb</h3>
-
+<h1>Unallocated Jobs</h1>
 
 
 <% @jobs.each do |job| %>
@@ -17,7 +15,14 @@
       <li>Planned Date: <%= job.accepted_date %></li>
       <li>Completed? <%= job.finished %></li>
       <li>Booker: <%= job.booker.name %></li>
-      <li>Technician: <%= job.technician.name %></li>
+
+      <% if job.technician_id.nil? %>
+        <li>Technician: TBC</li>
+      <% else %>
+        <li>Technician: <%= job.technician.name %></li>
+      <% end %>
+
+
     </ul>
     <%= link_to "Edit Job", job %>
   </div>

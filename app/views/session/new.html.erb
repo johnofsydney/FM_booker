@@ -3,20 +3,30 @@
 
 <%= flash[:error] %>
 
-<%= form_tag login_path do %>
+<%= form_tag login_path, :class => 'form-inline' do %>
+<div class="form-group">
   <%= label_tag :email %>
-  <%= email_field_tag :email %>
-
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
+  <%= email_field_tag :email, nil, :class => 'form-control'  %>
+</div>
 
 
-<%= radio_button_tag(:type, "booker") %>
-<%= label_tag(:type_booker, "Booker") %>
-<%= radio_button_tag(:type, "technician") %>
-<%= label_tag(:type_technician, "Technician") %>
+  <div class="form-group">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
 
 
 
-  <%= submit_tag "Login" %>
+  <div class="form-group">
+    <%= radio_button_tag(:type, "booker") %>
+    <%= label_tag(:type_booker, "Booker") %>
+    <%= radio_button_tag(:type, "technician") %>
+    <%= label_tag(:type_technician, "Technician") %>
+  </div>
+
+
+
+
+
+  <%= submit_tag "Login", :class => 'btn btn-info'  %>
 <% end %>
