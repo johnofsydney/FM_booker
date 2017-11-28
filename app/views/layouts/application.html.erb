@@ -12,28 +12,6 @@
 
     <div class="container">
 
-      <!-- <nav>
-        <%= link_to 'Home', root_path %>
-        <% if @current_user.present? %>
-
-          <% if session[:user_type] == "booker" %>
-            <%= "BOOKER" -%>
-            <%= link_to "New Job", new_job_path %>
-            <%= link_to "All Jobs", jobs_path %>
-          <% elsif session[:user_type] == "technician"%>
-            <%= "TECHNICIAN" -%>
-            <%= link_to "Unallocated Jobs", jobs_unallocated_path %>
-            <%= link_to "My Jobs", technician_path(session[:user_id]) %>
-          <% end %>
-
-          <%= link_to "Sign Out (#{ @current_user.name })", login_path, :method => 'delete' %>
-
-
-        <% else %> 
-          <%= link_to 'Sign In', login_path %>
-        <% end %>
-      </nav> -->
-
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -56,27 +34,38 @@
                   <!-- <%= "BOOKER" -%> -->
                   <li><%= link_to "New Job", new_job_path %></li>
                   <li><%= link_to "All Jobs", jobs_path %></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Toggle Off <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li id="toggle_allocated"><a href="#">Allocated</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li id="toggle_closed"><a href="#">Closed</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li id="toggle_ontrack"><a href="#">On Track</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li id="toggle_show_all"><a href="#">Show All</a></li>
+                      <!-- <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">One more separated link</a></li> -->
+                    </ul>
+                  </li>
+
                 <% elsif session[:user_type] == "technician"%>
                   <!-- <%= "TECHNICIAN" -%> -->
-                  <li><%= link_to "Unallocated Jobs", jobs_unallocated_path %></li>
+                  <% if Job.where(:accepted_date => nil).any? %>
+                    <li><%= link_to "Unallocated Jobs", jobs_unallocated_path%></li>
+                  <% else %>
+                    <li><%= link_to "Unallocated Jobs", jobs_unallocated_path %></li>
+                  <% end %>
                   <li><%= link_to "My Jobs", technician_path(session[:user_id]) %></li>
                 <% end %>
               <% end %>
 
               <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
               <li><a href="#">Link</a></li> -->
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+
             </ul>
             <form class="navbar-form navbar-left">
               <div class="form-group">
@@ -86,7 +75,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
 
-              <li class="dropdown">
+              <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Action</a></li>
@@ -95,7 +84,7 @@
                   <li role="separator" class="divider"></li>
                   <li><a href="#">Separated link</a></li>
                 </ul>
-              </li>
+              </li> -->
 
               <% if @current_user.present? %> <!-- someone is logged in -->
                 <li><%= link_to "Sign Out (#{ @current_user.name })", login_path, :method => 'delete' %></li>

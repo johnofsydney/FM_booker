@@ -5,7 +5,7 @@
 <% @today = Time.new.to_date %>
 
 
-<% @jobs = @jobs.sort_by{ |t| t.requested_date  } %>
+<% @jobs = @jobs.sort_by{ |t| t.requested_date  }.reverse %>
 
 
 <div class="joblist">

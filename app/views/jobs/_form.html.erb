@@ -3,59 +3,48 @@
 
   <div class="form-group">
     <%= f.label :summary %>
-    <%= f.text_field :summary, :class => 'form-control'  %>
+    <%= f.text_field :summary, :class => 'form-control', :required => true   %>
   </div>
 
   <div class="form-group">
     <%= f.label :detail %>
-    <%= f.text_field :detail, :class => 'form-control'  %>
+    <%= f.text_field :detail, :class => 'form-control', :required => true   %>
   </div>
 
   <div class="form-group">
     <%= f.label :address %>
-    <%= f.text_field :address, :class => 'form-control'   %>
+    <%= f.text_field :address, :class => 'form-control', :required => true %>
   </div>
 
   <div class="form-group">
     <%= f.label :requested_date %>
-    <%= f.text_field :requested_date, :class => 'form-control'   %>
+    <%= f.text_field :requested_date, :class => 'form-control', :required => true%>
   </div>
   <div class="form-group">
     <%= f.label :accepted_date %>
     <%= f.text_field :accepted_date, :class => 'form-control'   %>
   </div>
-  <!-- <div class="form-group">
-    <%= f.label :finished %>
-    <%= f.text_field :finished, :class => 'form-control'   %>
-  </div> -->
+
   <div class="form-group">
     <%= f.label :date_completed %>
     <%= f.text_field :date_completed, :class => 'form-control'   %>
   </div>
 
-
-  <div class="dropdown">
+  <div class="form-group hidden">
     <%= f.label :booker_id %>
-    <%= f.select :booker_id, options_for_select(Booker.pluck(:name, :id)), :include_blank => true, :selected => session[:user_id], :class => 'dropdown-menu'  %>
-  </div>`
+    <%= f.text_field :booker_id, :value => session[:user_id], :class => 'form-control'   %>
+  </div>
 
   <div class="form-group">
     <%= f.label :technician_id %>
-    <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true, class: "dropdown-menu" %>
-
-  </select>
+    <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true, :class => "dropdown-menu" %>
+  </div>
 
   <div class="form-group">
     <label></label>
     <%= f.submit :class => 'btn btn-info'  %>
   </div>
 
-  <!-- <fieldset>
-<label></label>
-  <%= f.submit %>
-</fieldset> -->
-
-
-
-
 <% end %>
+
+<p>Adding or editing a job will assign you as the job's booker. You are logged in as "<%= @current_user.name %>"</p>

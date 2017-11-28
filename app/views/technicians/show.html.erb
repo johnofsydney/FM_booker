@@ -24,6 +24,16 @@
 
   <div class="col-md-4">
 
+    <% if Job.where(:accepted_date => nil).any? %>
+    <div class="job mapjobs overdue flash">
+      <ul>
+        <h4><%= link_to "There are #{Job.where(:accepted_date => nil).count} unallocated jobs", jobs_unallocated_path %></h4>
+        <h4></h4>
+      </ul>
+    </div>
+    <% end %>
+
+
 
     <% jobs.each do |job| %>
 

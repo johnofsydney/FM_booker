@@ -15,7 +15,13 @@ class JobsController < ApplicationController
 
   def create
     job = Job.create job_params
-    redirect_to job
+    if job.save
+      redirect_to job
+    else
+      redirect_to root_path
+      # needs more elegant error trap
+    end
+
   end
 
 
@@ -32,7 +38,8 @@ class JobsController < ApplicationController
   end
 
   def show
-    @job = Job.find params[:id]
+    @job = Job.find_by :id => params[:id]
+    redirect_to root_path if @job.nil?
   end
 
   def destroy
@@ -44,7 +51,7 @@ class JobsController < ApplicationController
 
   private
   def job_params
-    params.require(:job).permit(:summary, :detail, :address, :requested_date, :accepted_date, :finished, :booker_id, :technician_id, :date_completed)
+    params.require(:job).permit(:detail, :summary, :requested_date, :address, :accepted_date, :finished, :booker_id, :technician_id, :date_completed)
   end
 
 

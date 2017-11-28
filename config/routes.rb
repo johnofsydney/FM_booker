@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   get '/jobs/unallocated' => 'jobs#unallocated'
 
-  resources :jobs, :only => [:index, :new, :create, :edit, :update, :show]
+  resources :jobs
   resources :technicians, :only => [:index, :new, :create, :edit, :update, :show]
 
 

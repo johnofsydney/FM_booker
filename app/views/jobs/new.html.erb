@@ -1,4 +1,12 @@
 <h1>Jobs#new</h1>
 <p>Find me in app/views/jobs/new.html.erb</p>
 
-<%= render :partial => "form" %>
+<% if @current_user.present? %> <!-- someone is logged in -->
+  <% if session[:user_type] == "booker" %>
+    <%= render :partial => "form" %>
+  <% elsif session[:user_type] == "technician"%>
+    <h2>Only a <i>Booker</i> can add a new job</h2>
+  <% end %>
+  <% else %>
+  <%= link_to "Not logged in...", root_path %></li>
+<% end %>
