@@ -4,10 +4,17 @@
 <!-- <% class_words = class_words.split(" ") %> -->
 <% @gAPIKey = "AIzaSyB7nJABK2HEiQKo4V-FCEMWX5xag8vVJeA" %>
 <% waypoints = "&waypoints=" %>
+<% @today = Time.new.to_date %>
 
 
 <!-- <% @technician.jobs.sort_by(&:accepted_date) %> -->
-<% jobs = @technician.jobs %>
+<!-- <% jobs = @technician.jobs %> -->
+
+
+<% jobs = @technician.jobs.select { |key, value | key.date_completed.nil? } %>
+
+
+
 <!-- need to filter toedclude fibnished jobs -->
 <% jobs = jobs.sort_by{ |t| t.accepted_date  } %>
 <% address_first = jobs.first.address %>
@@ -20,17 +27,42 @@
 
     <% jobs.each do |job| %>
 
+    <% class_words = "job mapjobs "  %>
+
+    <% if job.accepted_date == nil %>
+      <% class_words = class_words + "unallocated " %>
+    <% else %>
+      <% class_words = class_words + "allocated " %>
+    <% end %>
+
+    <% if job.date_completed == nil %>
+      <% class_words = class_words + "open " %>
+    <% else %>
+      <% class_words = class_words + "closed " %>
+    <% end %>
+
+    <% if (job.requested_date < @today) %>
+      <% class_words = class_words + "overdue " %>
+    <% else %>
+      <% class_words = class_words + "ontrack " %>
+    <% end %>
+
+    <% class_words = class_words.split(" ") %>
+
+
+
       <%= tag("div", class: class_words) %>
       <!-- <div class="<%= class_words %>"> -->
         <ul>
-          <h3><%= link_to job.summary, job %></h3>
-          <li>Info: <%= job.detail %></li>
+          <h4><%= link_to job.summary, job %></h4>
+          <!-- <li>Info: <%= job.detail %></li> -->
           <li>Address: <%= job.address %></li>
           <li>Requested Date: <%= job.requested_date %></li>
           <li>Planned Date: <%= job.accepted_date %></li>
-          <li>Completed? <%= job.finished %></li>
+          <!-- <li>Completed Date: <%= job.date_completed %></li> -->
+          <!-- <li>Completed? <%= job.finished %></li> -->
           <li>Booker: <%= job.booker.name %></li>
-          <li>Technician: <%= job.technician.name %></li>
+          <!-- <li>Technician: <%= job.technician.name %></li> -->
         </ul>
       </div>
 

@@ -1,3 +1,54 @@
 // Place all the styles related to the Jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$primary-color: #333;
+
+body {
+
+}
+
+.container {
+
+}
+
+.job {
+  background: #dff0d8;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+  margin: 1em;
+  box-sizing: border-box;
+}
+
+
+.unallocated {
+  background: #fcf8e3;
+}
+
+.overdue {
+  background: #f2dede
+}
+
+.closed {
+  background: #EEE;
+}
+
+.hidden {
+  display: none;
+}
+
+.joblist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mapjobs {
+  padding: 1px 0 1px 0;
+}

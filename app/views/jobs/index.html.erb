@@ -1,56 +1,64 @@
-<h1>Jobs#index</h1>
-<p>Find me in app/views/jobs/index.html.erb</p>
+<h1>List of Jobs</h1>
 
 
 
+<% @today = Time.new.to_date %>
 
 
+<% @jobs = @jobs.sort_by{ |t| t.requested_date  } %>
 
-<% @jobs.each do |job| %>
 
-  <% class_words = "job col-md-4 "  %>
+<div class="joblist">
 
-  <% if job.accepted_date == nil %>
-    <% class_words = class_words + "unallocated " %>
-  <% else %>
-    <% class_words = class_words + "allocated " %>
+  <% @jobs.each do |job| %>
+
+    <% class_words = "job col-md-3 "  %>
+
+    <% if job.accepted_date == nil %>
+      <% class_words = class_words + "unallocated " %>
+    <% else %>
+      <% class_words = class_words + "allocated " %>
+    <% end %>
+
+    <% if job.date_completed == nil %>
+      <% class_words = class_words + "open " %>
+    <% else %>
+      <% class_words = class_words + "closed " %>
+    <% end %>
+
+    <% if (job.requested_date < @today) %>
+      <% class_words = class_words + "overdue " %>
+    <% else %>
+      <% class_words = class_words + "ontrack " %>
+    <% end %>
+
+    <% class_words = class_words.split(" ") %>
+
+
+    <%= tag("div", class: class_words) %>
+    <!-- <div class="<%= class_words %>"> -->
+      <ul>
+        <h4><%= link_to job.summary, job %></h4>
+        <!-- <li>Info: <%= job.detail %></li> -->
+        <li>Address: <%= job.address %></li>
+        <li>Requested Date: <%= job.requested_date %></li>
+        <li>Planned Date: <%= job.accepted_date %></li>
+        <li>Completed Date: <%= job.date_completed %></li>
+        <!-- <li>Completed? <%= job.finished %></li> -->
+        <li>Booker: <%= job.booker.name %></li>
+
+        <% if job.technician_id.nil? %>
+          <li>Technician: TBC</li>
+        <% else %>
+          <li>Technician: <%= job.technician.name %></li>
+        <% end %>
+
+      </ul>
+      <!-- <%= link_to "Edit Job", job %> -->
+    </div>
+
+
   <% end %>
 
-  <% if job.finished == true %>
-    <% class_words = class_words + "closed " %>
-  <% else %>
-    <% class_words = class_words + "open " %>
-  <% end %>
 
-
-
-  <% class_words = class_words.split(" ") %>
-
-  <%= tag("div", class: class_words) %>
-  <!-- <div class="<%= class_words %>"> -->
-    <ul>
-      <h3><%= link_to job.summary, job %></h3>
-      <!-- <li>Info: <%= job.detail %></li> -->
-      <li>Address: <%= job.address %></li>
-      <li>Requested Date: <%= job.requested_date %></li>
-      <li>Planned Date: <%= job.accepted_date %></li>
-      <li>Completed? <%= job.finished %></li>
-      <li>Booker: <%= job.booker.name %></li>
-
-      <% if job.technician_id.nil? %>
-        <li>Technician: TBC</li>
-      <% else %>
-        <li>Technician: <%= job.technician.name %></li>
-      <% end %>
-
-
-    </ul>
-    <!-- <%= link_to "Edit Job", job %> -->
-  </div>
-
-  <!-- waypoints specifies one or more intermediary places to route directions through between the origin and destination. Multiple waypoints can be specified by using the pipe character (|) to separate places (e.g. Berlin,Germany|Paris,France). You can specify up to 20 waypoints. Each waypoint can be either a place name, address or place ID.
-   -->
-
-
-
-<% end %>
+</div>
