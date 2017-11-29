@@ -34,6 +34,7 @@ gem 'record_tag_helper', '~> 1.0'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'cloudinary'
+gem 'pg_search'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,34 +1,51 @@
-<h1>Jobs Details</h1>
-<p>Find me in app/views/jobs/show.html.erb</p>
+<div class="col-md-12">
 
-<ul>
-  <h3><%= @job.summary %></h3>
-  <li>Info: <%= @job.detail %></li>
-  <li>Address: <%= @job.address %></li>
-  <li>Requested Date: <%= @job.requested_date %></li>
-  <li>Planned Date: <%= @job.accepted_date %></li>
-  <li>Completed? :<%= @job.finished %></li>
-  <li>Booker: <%= @job.booker.name %></li>
-  <% if @job.technician_id.nil? %>
-    <li>Technician: TBC</li>
+  <div class="job closed">
+
+    <%= button_to "Edit Job", edit_job_path(@job), :method => 'get', :class => "btn btn-primary", form: {style: 'display:inline-block;'} %>
+    <%= button_to 'Delete Job', @job, :method => 'delete', :class => "btn btn-danger", :data => { :confirm => 'Are you sure?'}, form: {style: 'display:inline-block;'} %>
+
+  </div>
+
+
+
+
+  <div class="job minicon container">
+    <ul>
+      <h2><%= @job.summary %></h2>
+    </ul>
+
+    <div class="col-md-3" >
+      <ul>
+
+
+        <li>Address: <%= @job.address %></li>
+        <li>Requested Date: <%= @job.requested_date %></li>
+        <li>Planned Date: <%= @job.accepted_date %></li>
+        <li>Completed Date: <%= @job.date_completed %></li>
+
+        <li>Booker: <%= @job.booker.name %></li>
+        <% if @job.technician_id.nil? %>
+          <li>Technician: TBC</li>
+        <% else %>
+          <li>Technician: <%= @job.technician.name %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div  class="col-md-9 ">
+      <p><%= @job.detail %></p>
+    </div>
+  </div>
+
+
+
+  <% if @job.photo.nil? %>
   <% else %>
-    <li>Technician: <%= @job.technician.name %></li>
+  <div class=" mt-1em ">
+    <%= image_tag(@job.photo, :class => 'img-rounded photo') unless @job.photo.nil? %>
+  </div>
   <% end %>
 
-
-
-</ul>
-
-
-<%= image_tag(@job.photo, :class => '') unless @job.photo.nil? %>
-
-<div class="controls">
-
-
-
-  <%= button_to 'Delete Job', @job, :method => 'delete', :class => "btn btn-primary", :data => { :confirm => 'Are you sure?'} %>
-
-
-  <%= button_to "Edit Job", edit_job_path(@job), :method => 'get', :class => "btn btn-danger" %>
 
 </div>

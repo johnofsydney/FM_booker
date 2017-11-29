@@ -16,33 +16,34 @@ class JobsController < ApplicationController
     if job.save
       redirect_to job
     else
-      redirect_to root_path
-      # needs more elegant error trap
+      redirect_to pages_problem_path
     end
-
   end
 
 
   def edit
     @job = Job.find params[:id]
-    # @technicians = Technician.all
-    # @bookers = Booker.all
   end
 
   def update
     job = Job.find params[:id]
     # raise
-    cloudinary = Cloudinary::Uploader.upload( params[ "job" ][ "photo" ] )
-    job.photo = cloudinary["url"]
+    if params["job"]["photo"].nil?
+    else
+      cloudinary = Cloudinary::Uploader.upload( params[ "job" ][ "photo" ] )
+      job.photo = cloudinary["url"]
+    end
     job.update job_params
-    # Note that photo is NOT being saved along with the other params
-
     redirect_to job
   end
 
   def show
     @job = Job.find_by :id => params[:id]
-    redirect_to root_path if @job.nil?
+    if @job.nil?
+      flash[:error] = "Please don't enter job number in the URL. That's naughty."
+      redirect_to pages_problem_path
+    end
+
   end
 
   def destroy

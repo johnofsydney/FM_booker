@@ -2,8 +2,8 @@ class TechniciansController < ApplicationController
   def index
     @technicians = Technician.all
     if session[:user_type] == "technician"
-      @message = "Not permitted to see this page."
-      redirect_to root_path
+      flash[:error] = "Step off - you're not allowed to to see thast page."
+      redirect_to pages_problem_path
     end
   end
 
@@ -16,8 +16,8 @@ class TechniciansController < ApplicationController
     if technician.save
       redirect_to technician
     else
-      redirect_to root_path
-      # needs more elegant error trap
+      flash[:error] = "Couldn't create the new technician."
+      redirect_to pages_problem_path
     end
   end
 
@@ -26,9 +26,6 @@ class TechniciansController < ApplicationController
   end
 
   def update
-    # user = @current_user # User.find params[:id]
-    # user.update user_params
-    # redirect_to root_path
     technician = Technician.find params[:id]
     technician.update technician_params
     redirect_to technician
@@ -37,8 +34,8 @@ class TechniciansController < ApplicationController
   def show
     @technician = Technician.find params[:id]
     if @technician.jobs.count == 0
-      @message = "There are no jobs associated with this user."
-      redirect_to root_path
+      flash[:error] = "There are no jobs associated wit that user."
+      redirect_to pages_problem_path
     end
   end
 

@@ -3,6 +3,7 @@
 #           Prefix Verb   URI Pattern                     Controller#Action
 #             root GET    /                               pages#home
 # jobs_unallocated GET    /jobs/unallocated(.:format)     jobs#unallocated
+#    pages_problem GET    /pages/problem(.:format)        pages#problem
 #             jobs GET    /jobs(.:format)                 jobs#index
 #                  POST   /jobs(.:format)                 jobs#create
 #          new_job GET    /jobs/new(.:format)             jobs#new
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
   root :to => "pages#home"
 
   get '/jobs/unallocated' => 'jobs#unallocated'
+  get '/pages/problem' => 'pages#problem'
 
   resources :jobs
   resources :technicians, :only => [:index, :new, :create, :edit, :update, :show]
