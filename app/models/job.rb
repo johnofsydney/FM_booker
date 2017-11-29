@@ -23,4 +23,9 @@ class Job < ApplicationRecord
 
   validates :requested_date, :presence => true
   
+  include PgSearch
+  pg_search_scope :search_full_text, against: {
+  summary: 'A',
+  detail: 'B'
+  }
 end

@@ -1,6 +1,22 @@
 class JobsController < ApplicationController
   def index
-    @jobs = Job.all
+    if params[:term]
+      @jobs = Job.search_full_text(params[:term])
+    else
+      @jobs = Job.all
+    end
+  end
+#
+#   if params[:term]
+#   @users = User.search_by_full_name(params[:term])
+# else
+#   @users = User.all
+# end
+
+  def search
+    # @jobs = Job.search_full_text("tap")
+    # raise
+    @jobs = Job.search_full_text(params[:term])
   end
 
   def unallocated
