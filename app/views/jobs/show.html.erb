@@ -1,4 +1,4 @@
-<h1>Jobs#show</h1>
+<h1>Jobs Details</h1>
 <p>Find me in app/views/jobs/show.html.erb</p>
 
 <ul>
@@ -14,11 +14,21 @@
   <% else %>
     <li>Technician: <%= @job.technician.name %></li>
   <% end %>
+
+
+
 </ul>
 
 
+<%= image_tag(@job.photo, :class => '') unless @job.photo.nil? %>
+
 <div class="controls">
-  <%= link_to 'Delete Job', @job, :method => 'delete', :data => { :confirm => 'Are you sure?'} %>
-  <%= link_to "Edit Job", edit_job_path(@job) %>
+
+
+
+  <%= button_to 'Delete Job', @job, :method => 'delete', :class => "btn btn-primary", :data => { :confirm => 'Are you sure?'} %>
+
+
+  <%= button_to "Edit Job", edit_job_path(@job), :method => 'get', :class => "btn btn-danger" %>
 
 </div>

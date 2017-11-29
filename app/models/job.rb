@@ -14,6 +14,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  date_completed :date
+#  photo          :text
 #
 
 class Job < ApplicationRecord

@@ -1,4 +1,4 @@
-<%= form_for @job do |f| %>
+<%= form_for @job, :html => { :multipart => true } do |f| %>
 
 
   <div class="form-group">
@@ -18,27 +18,81 @@
 
   <div class="form-group">
     <%= f.label :requested_date %>
-    <%= f.text_field :requested_date, :class => 'form-control', :required => true%>
+    <%= f.text_field :requested_date, :class => 'form-control', :required => true %>
   </div>
-  <div class="form-group">
-    <%= f.label :accepted_date %>
-    <%= f.text_field :accepted_date, :class => 'form-control'   %>
-  </div>
+
+
+  <% if session[:user_type] == "booker" %>
+    <!-- <%= "BOOKER" -%> -->
+    <div class="form-group">
+      <%= f.label :accepted_date %>
+      <%= f.text_field :accepted_date, :class => 'form-control'   %>
+    </div>
+
+
+  <% elsif session[:user_type] == "technician"%>
+    <!-- <%= "TECHNICIAN" -%> -->
+    <div class="form-group">
+      <%= f.label :accepted_date %>
+      <%= f.text_field :accepted_date, :class => 'form-control', :required => true    %>
+    </div>
+
+  <% end %>
+
+
+
+
 
   <div class="form-group">
     <%= f.label :date_completed %>
     <%= f.text_field :date_completed, :class => 'form-control'   %>
   </div>
 
-  <div class="form-group hidden">
-    <%= f.label :booker_id %>
-    <%= f.text_field :booker_id, :value => session[:user_id], :class => 'form-control'   %>
-  </div>
+
+  <% if session[:user_type] == "booker" %>
+    <!-- <%= "BOOKER" -%> -->
+    <div class="form-group hidden">
+      <%= f.label :booker_id %>
+      <%= f.text_field :booker_id, :value => session[:user_id], :class => 'form-control'   %>
+    </div>
+
+    <div class="form-group hidden">
+      <%= f.label :technician_id %>
+      <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true, :class => "dropdown-menu" %>
+    </div>
+
+  <% elsif session[:user_type] == "technician"%>
+    <!-- <%= "TECHNICIAN" -%> -->
+
+    <div class="form-group hidden">
+      <%= f.label :technician_id %>
+      <%= f.text_field :technician_id, :value => session[:user_id], :class => 'form-control'  %>
+    </div>
+
+
+
+  <% end %>
+
 
   <div class="form-group">
-    <%= f.label :technician_id %>
-    <%= f.select :technician_id, Technician.pluck(:name, :id), :include_blank => true, :class => "dropdown-menu" %>
-  </div>
+     <%= f.label :photo %><br>
+     <%= f.file_field :photo %>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="form-group">
     <label></label>
@@ -47,4 +101,15 @@
 
 <% end %>
 
-<p>Adding or editing a job will assign you as the job's booker. You are logged in as "<%= @current_user.name %>"</p>
+
+
+
+
+<% if session[:user_type] == "booker" %>
+  <!-- <%= "BOOKER" -%> -->
+  <p>Adding or editing a job will assign you as the job's booker. You are logged in as "<%= @current_user.name %>. You cannot assign a technician, the technician must accept the job themselves."</p>
+
+<% elsif session[:user_type] == "technician"%>
+  <!-- <%= "TECHNICIAN" -%> -->
+  <p>Editing a job will assign you as the job's technician. You are logged in as "<%= @current_user.name %>"</p>
+<% end %>

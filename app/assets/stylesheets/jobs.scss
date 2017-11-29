@@ -14,7 +14,8 @@ body {
 }
 
 .job {
-  background: #dff0d8;
+  //background: #dff0d8;
+  background: rgba(45,201,55,0.6);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -28,11 +29,13 @@ body {
 
 
 .unallocated {
-  background: #fcf8e3;
+  //background: #fcf8e3;
+  background: rgba(231,180,22,0.6);
 }
 
 .overdue {
-  background: #f2dede
+  //background: #f2dede
+  background: rgba(204,50,50,0.6);
 }
 
 .closed {

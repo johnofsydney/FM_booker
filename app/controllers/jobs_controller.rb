@@ -4,13 +4,11 @@ class JobsController < ApplicationController
   end
 
   def unallocated
-    @jobs = Job.where('accepted_date'=>nil)
+    @jobs = Job.where('technician_id'=>nil)
   end
 
   def new
     @job = Job.new
-    # @technicians = Technician.all
-    # @bookers = Booker.all
   end
 
   def create
@@ -33,7 +31,12 @@ class JobsController < ApplicationController
 
   def update
     job = Job.find params[:id]
+    # raise
+    cloudinary = Cloudinary::Uploader.upload( params[ "job" ][ "photo" ] )
+    job.photo = cloudinary["url"]
     job.update job_params
+    # Note that photo is NOT being saved along with the other params
+
     redirect_to job
   end
 
@@ -53,6 +56,7 @@ class JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:detail, :summary, :requested_date, :address, :accepted_date, :finished, :booker_id, :technician_id, :date_completed)
   end
+
 
 
 

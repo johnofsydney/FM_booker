@@ -1,2 +1,8 @@
 <h1>Technicians#edit</h1>
 <p>Find me in app/views/technicians/edit.html.erb</p>
+
+<% if session[:user_id].to_i == params[:id].to_i  %>
+  <%= render :partial => "form" %>
+<% else %>
+  <p>You can't edit someone elses details</p>
+<% end %>
