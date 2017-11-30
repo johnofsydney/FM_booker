@@ -1,32 +1,19 @@
 <h1>Unallocated Jobs</h1>
 
 
-<% @jobs.each do |job| %>
+<div class="joblist">
 
+  <% @jobs.each do |job| %>
 
+    <div class="job col-md-3 closed">
+      <ul>
+        <h3><%= link_to job.summary, job %></h3>
+        <li>Info: <%= job.detail %></li>
+        <li>Address: <%= job.address %></li>
+        <li>Requested Date: <%= job.requested_date %></li>
+        <li>Booker: <%= job.booker.name %></li>
+      </ul>
+    </div>
 
-  <%= tag("div") %>
-
-    <ul>
-      <h3><%= link_to job.summary, job %></h3>
-      <li>Info: <%= job.detail %></li>
-      <li>Address: <%= job.address %></li>
-      <li>Requested Date: <%= job.requested_date %></li>
-      <!-- <li>Planned Date: <%= job.accepted_date %></li>
-      <li>Completed? <%= job.finished %></li> -->
-      <li>Booker: <%= job.booker.name %></li>
-
-      <!-- <% if job.technician_id.nil? %>
-        <li>Technician: TBC</li>
-      <% else %>
-        <li>Technician: <%= job.technician.name %></li>
-      <% end %> -->
-
-
-    </ul>
-
-  </div>
-
-
-
-<% end %>
+  <% end %>
+</div>

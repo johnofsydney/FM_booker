@@ -34,6 +34,10 @@ body {
   background: rgba(231,180,22,0.6);
 }
 
+.allocated {
+
+}
+
 .overdue {
   //background: #f2dede
   background: rgba(204,50,50,0.6);
@@ -89,4 +93,12 @@ body {
 
 .minicon {
   max-width: 97%;
+}
+
+.tall-field {
+  size: 200%;
+}
+
+.m_zero {
+  margin: 0;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FMBooker</title>
+    <title>FM_Booker</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,86 +9,56 @@
   </head>
 
   <body>
-
     <div class="container">
 
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <!-- <a class="navbar-brand" href="root_path">FM_Booker</a> -->
-            <%= link_to 'FM_Booker', root_path, :class => "navbar-brand" %>
-          </div>
+    <!-- <nav> ************************************ -->
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <% if @current_user.present? %> <!-- someone is logged in -->
-                <% if session[:user_type] == "booker" %>
-                  <!-- <%= "BOOKER" -%> -->
-                  <li><%= link_to "New Job", new_job_path %></li>
-                  <li><%= link_to "All Jobs", jobs_path %></li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Toggle Off <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li id="toggle_allocated"><a href="#">Allocated</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li id="toggle_closed"><a href="#">Closed</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li id="toggle_ontrack"><a href="#">On Track</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li id="toggle_show_all"><a href="#">Show All</a></li>
-                      <!-- <li><a href="#">Something else here</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">One more separated link</a></li> -->
-                    </ul>
-                  </li>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to 'FM_Booker', root_path, :class => "navbar-brand" %>
+        </div>
 
-                <% elsif session[:user_type] == "technician"%>
-                  <!-- <%= "TECHNICIAN" -%> -->
-                  <% if Job.where(:accepted_date => nil).any? %>
-                    <li><%= link_to "Unallocated Jobs", jobs_unallocated_path%></li>
-                  <% else %>
-                    <li><%= link_to "Unallocated Jobs", jobs_unallocated_path %></li>
-                  <% end %>
-                  <li><%= link_to "My Jobs", technician_path(session[:user_id]) %></li>
+        <% if @current_user.present? %>
+          <% if session[:user_type] == "booker" %>
+            <!-- ******* START OF BOOKER / TECHNICIAN IF SECTION ******* -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+              <ul class="nav navbar-nav">
+                <li><%= link_to "New Job", new_job_path %></li>
+                <li><%= link_to "All Jobs", jobs_path %></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Toggle Off <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li id="toggle_allocated"><a href="#">Allocated</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li id="toggle_closed"><a href="#">Closed</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li id="toggle_ontrack"><a href="#">On Track</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li id="toggle_show_all"><a href="#">Show All</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+              <div class="navbar-form navbar-left m_zero">
+                <%= form_tag jobs_path, method: :get do %>
+                  <div class="form-group">
+                    <%= text_field_tag 'term', params[:term], placeholder: "Search...", class: "form-control" %>
+                    <%= submit_tag 'Search!', :class => 'btn btn-default btn-sm'%>
+                  </div>
                 <% end %>
-              <% end %>
-
-              <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Link</a></li> -->
-
-            <!-- </ul>
-            <form class="navbar-form navbar-left">
-            	<div class="form-group">
-            		<input type="text" class="form-control" placeholder="Search">
-            	</div>
-            <button type="submit" class="btn btn-default">Submit</button>
-            </form> -->
-
-            <div class="navbar-form navbar-left">
-
-            <%= form_tag jobs_path, method: :get do %>
-              <div class="form-group">
-                <%= text_field_tag 'term', params[:term], placeholder: "Search...", class: "form-control" %>
-                <%= submit_tag 'Search!', :class => 'btn btn-default btn-sm'%>
               </div>
 
-            <% end %>
-            </div>
-
-
-            <ul class="nav navbar-nav navbar-right">
-              <% if session[:user_type] == "booker" %>
-                <!-- <%= "BOOKER" -%> -->
+              <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -100,28 +70,52 @@
                     <li><a href="#">Separated link</a></li>
                   </ul>
                 </li>
-
-              <% elsif session[:user_type] == "technician"%>
-                <!-- <%= "TECHNICIAN" -%> -->
-                <!-- <li>  link_to 'Edit My Details', edit_technician_path(session[:user_id]) </li> -->
-              <% end %>
-
-
-
-              <% if @current_user.present? %> <!-- someone is logged in -->
                 <li><%= link_to "Sign Out (#{ @current_user.name })", login_path, :method => 'delete' %></li>
-              <% else %> <!-- user is not logged in -->
-                <li><%= link_to 'Sign In', login_path %></li>
-              <% end %>
+              </ul>
 
-              <!-- <li><a href="#">Link</a></li> -->
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
+            </div><!-- /.navbar-collapse -->
+          <% elsif session[:user_type] == "technician"%>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+              <ul class="nav navbar-nav">
+                <li><%= link_to "Unallocated Jobs", jobs_unallocated_path %></li>
+                <li><%= link_to "My Jobs", technician_path(session[:user_id]) %></li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Sign Out (#{ @current_user.name })", login_path, :method => 'delete' %></li>
+              </ul>
+
+            </div><!-- /.navbar-collapse -->
+          <% end %>
+
+        <% else %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'Sign In', login_path %></li>
+          </ul>
+        <% end %>
 
 
-      <%= yield %>
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+
+
+
+
+    <!-- </nav>  ************************************ -->
+
+
+
+
+
+    <%= yield %>
+
+
+
+
+
 
     </div>
   </body>

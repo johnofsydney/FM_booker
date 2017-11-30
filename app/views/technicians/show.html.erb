@@ -1,4 +1,4 @@
-<h1>Open Jobs for <%= @technician.name %></h1>
+<h1>Open Jobs: <%= @technician.name %></h1>
 
 <% class_words = "testing" %>
 <!-- <% class_words = class_words.split(" ") %> -->
@@ -15,17 +15,7 @@
 
   <% jobs = @technician.jobs.select { |key, value | key.date_completed.nil? } %>
 
-    <% jobs = jobs.sort_by{ |t| t.id } %>
-    <!-- should be sort by t.accepted_date have used t.id to get out of trouble -->
-    <!-- which breasks if there is a job allocated to this booker with NO accepted date -->
-    <!-- so, will fix by finishing the delete job part, and then not allowing booker to  -->
-    <!-- assign a job to a technician. -->
-
-    <!-- <% jobs.each do |j| %>
-    <p><%= j.id  %> //
-    <%= j.accepted_date %>
-    <% end %></p> -->
-
+    <% jobs = jobs.sort_by{ |t| t.accepted_date } %>
 
     <% address_first = jobs.first.address %>
     <% address_last = jobs.last.address %>
@@ -35,7 +25,7 @@
       <div class="col-md-4">
 
         <% if Job.where(:accepted_date => nil).any? %>
-        <div class="job mapjobs overdue alert alert-primary">
+        <div class="job mapjobs unallocated alert-primary">
           <ul>
             <h4><%= link_to "There are #{Job.where(:technician_id => nil).count} unallocated jobs", jobs_unallocated_path %></h4>
             <h4></h4>
@@ -72,17 +62,12 @@
 
 
           <%= tag("div", class: class_words) %>
-          <!-- <div class="<%= class_words %>"> -->
             <ul>
               <h4><%= link_to job.summary, job %></h4>
-              <!-- <li>Info: <%= job.detail %></li> -->
               <li>Address: <%= job.address %></li>
               <li>Requested Date: <%= job.requested_date %></li>
               <li>Planned Date: <%= job.accepted_date %></li>
-              <!-- <li>Completed Date: <%= job.date_completed %></li> -->
-              <!-- <li>Completed? <%= job.finished %></li> -->
               <li>Booker: <%= job.booker.name %></li>
-              <!-- <li>Technician: <%= job.technician.name %></li> -->
             </ul>
           </div>
 
@@ -112,7 +97,7 @@
 
 
 
-          <iframe width="740" height="550" frameborder="0" style="border:0" src="<%= @gmapURL %>" allowfullscreen></iframe>
+          <iframe width="740" height="650" frameborder="0" style="border:0" src="<%= @gmapURL %>" allowfullscreen></iframe>
 
       </div>
 
