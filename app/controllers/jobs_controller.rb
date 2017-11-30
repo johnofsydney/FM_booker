@@ -1,21 +1,24 @@
 class JobsController < ApplicationController
+
+
+
   def index
     # if params[:term].length != 0
     if params[:term]
       if params[:term].length != 0
-        @jobs = Job.search_full_text(params[:term])
+        @jobs = @current_user.company.job.search_full_text(params[:term])
       else
-        @jobs = Job.all
+        @jobs = @current_user.company.job.all
       end
     else
-      @jobs = Job.all
+      @jobs = @current_user.company.jobs.all
     end
 
   end
 
 
   def unallocated
-    @jobs = Job.where('technician_id'=>nil)
+    @jobs = @current_user.company.jobs.where('technician_id'=>nil)
   end
 
   def new

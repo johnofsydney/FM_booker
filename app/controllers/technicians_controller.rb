@@ -34,7 +34,11 @@ class TechniciansController < ApplicationController
   def show
     @technician = Technician.find params[:id]
     if @technician.jobs.count == 0
-      flash[:error] = "There are no jobs associated wit that user."
+      flash[:error] = "There are no jobs associated with that user."
+      redirect_to pages_problem_path
+    end
+    if @technician.id != @current_user.id
+      flash[:error] = "Thats not your page."
       redirect_to pages_problem_path
     end
   end

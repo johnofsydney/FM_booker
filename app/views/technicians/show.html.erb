@@ -8,8 +8,7 @@
 
 
 
-
-<% if @technician.jobs.count < 1 %>
+<% if @current_user.company.jobs.count < 1 %>
   <p>No jobs to display</p>
 <% else %>
 
@@ -27,7 +26,7 @@
         <% if Job.where(:accepted_date => nil).any? %>
         <div class="job mapjobs unallocated alert-primary">
           <ul>
-            <h4><%= link_to "There are #{Job.where(:technician_id => nil).count} unallocated jobs", jobs_unallocated_path %></h4>
+            <h4><%= link_to "There are #{@current_user.company.jobs.where(:technician_id => nil).count} unallocated jobs", jobs_unallocated_path %></h4>
             <h4></h4>
           </ul>
         </div>

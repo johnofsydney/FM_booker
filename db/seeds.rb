@@ -9,10 +9,12 @@
 Booker.destroy_all
 booker1 = Booker.create :name => "Mr Incredible", :email => "bob@ga.co", :password => 'chicken'
 booker2 = Booker.create :name => "Elastigirl", :email => "helen@ga.co", :password => 'chicken'
+booker3 = Booker.create :name => "Allan Border", :email => "allan@ga.co", :password => 'chicken'
 
 Technician.destroy_all
-tech1 = Technician.create :name => "Finn", :email => "finn@ga.co", :password => 'chicken'
-tech2 = Technician.create :name => "Jake", :email => "jake@ga.co", :password => 'chicken'
+technician1 = Technician.create :name => "Finn", :email => "finn@ga.co", :password => 'chicken'
+technician2 = Technician.create :name => "Jake", :email => "jake@ga.co", :password => 'chicken'
+technician3 = Technician.create :name => "Shane Warne", :email => "shane@ga.co", :password => 'chicken'
 
 Job.destroy_all
 job1 = Job.create :summary => "Fix Leaking Tap", :detail => "Fix the tap. Plumbing. Pipes. Cras sollicitudin lorem quis lorem semper, nec gravida neque fermentum. Curabitur dignissim quam libero, nec.", :address => "1 Macquarie Street, Sydney NSW 2000", :requested_date =>"2017/12/25"
@@ -21,8 +23,18 @@ job3 = Job.create :summary => "Change the light bulb", :detail => "Light switch 
 job4 = Job.create :summary => "Dust the cobwebs", :detail => "Dust my broom. Cras sollicitudin lorem quis lorem semper, nec gravida neque fermentum. Curabitur dignissim quam libero, nec.",  :address => "1 York Street, Sydney NSW 2000", :requested_date =>"2017/12/25"
 job5 = Job.create :summary => "Clean your room", :detail => "Teenagers. Messy room. Old Sanwich Cras sollicitudin lorem quis lorem semper, nec gravida neque fermentum. Curabitur dignissim quam libero, nec.",  :address => "1 Market Street, Sydney NSW 2000", :requested_date =>"2017/12/25"
 
-booker1.jobs << job1 << job2 << job3
-tech1.jobs << job1
+Company.destroy_all
+company1 = Company.create :name => "Bobs Burgers"
+company2 = Company.create :name => "Cricketers"
 
-booker2.jobs << job4 << job5
-tech2.jobs << job2
+company1.bookers << booker1 << booker2
+company1.technicians << technician1 << technician2
+company2.bookers << booker3
+company2.technicians << technician3
+
+
+booker1.jobs << job1 << job2 << job3
+technician1.jobs << job1
+
+booker3.jobs << job4 << job5
+technician3.jobs << job4
