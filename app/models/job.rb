@@ -22,10 +22,11 @@ class Job < ApplicationRecord
   belongs_to :technician, :optional => true
 
   validates :requested_date, :presence => true
-  
+
   include PgSearch
   pg_search_scope :search_full_text, against: {
   summary: 'A',
-  detail: 'B'
+  detail: 'B',
+  address: 'C'
   }
 end
