@@ -23,7 +23,7 @@
 #            login GET    /login(.:format)                session#new
 #                  POST   /login(.:format)                session#create
 #                  DELETE /login(.:format)                session#destroy
-# 
+#
 
 Rails.application.routes.draw do
 
@@ -31,7 +31,6 @@ Rails.application.routes.draw do
   root :to => "pages#home"
 
   get '/jobs/unallocated' => 'jobs#unallocated'
-  get '/jobs/search' => 'jobs#search'
   get '/pages/problem' => 'pages#problem'
 
   resources :jobs

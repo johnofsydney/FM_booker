@@ -9,7 +9,7 @@
 #
 
 class Company < ApplicationRecord
-  has_many :technicians
+  has_many :bookers
   has_many :approvals
   has_many :jobs, :through => :bookers
 end

@@ -25,13 +25,23 @@ job5 = Job.create :summary => "Clean your room", :detail => "Teenagers. Messy ro
 
 Company.destroy_all
 company1 = Company.create :name => "Bobs Burgers"
-company2 = Company.create :name => "Cricketers"
+company3 = Company.create :name => "Cricketers"
+
+Approval.destroy_all
+approval1 = Approval.create :approved => true
+approval2 = Approval.create :approved => true
+approval3 = Approval.create :approved => true
 
 company1.bookers << booker1 << booker2
-company1.technicians << technician1 << technician2
-company2.bookers << booker3
-company2.technicians << technician3
+company1.approvals << approval1
+company1.approvals << approval2
 
+company3.bookers << booker3
+company3.approvals << approval3
+
+technician1.approvals << approval1
+technician2.approvals << approval2
+technician3.approvals << approval3
 
 booker1.jobs << job1 << job2 << job3
 technician1.jobs << job1
