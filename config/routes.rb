@@ -3,7 +3,6 @@
 #           Prefix Verb   URI Pattern                     Controller#Action
 #             root GET    /                               pages#home
 # jobs_unallocated GET    /jobs/unallocated(.:format)     jobs#unallocated
-#      jobs_search GET    /jobs/search(.:format)          jobs#search
 #    pages_problem GET    /pages/problem(.:format)        pages#problem
 #             jobs GET    /jobs(.:format)                 jobs#index
 #                  POST   /jobs(.:format)                 jobs#create
@@ -20,13 +19,29 @@
 #       technician GET    /technicians/:id(.:format)      technicians#show
 #                  PATCH  /technicians/:id(.:format)      technicians#update
 #                  PUT    /technicians/:id(.:format)      technicians#update
+#        companies GET    /companies(.:format)            companies#index
+#                  POST   /companies(.:format)            companies#create
+#      new_company GET    /companies/new(.:format)        companies#new
+#     edit_company GET    /companies/:id/edit(.:format)   companies#edit
+#          company GET    /companies/:id(.:format)        companies#show
+#                  PATCH  /companies/:id(.:format)        companies#update
+#                  PUT    /companies/:id(.:format)        companies#update
+#                  DELETE /companies/:id(.:format)        companies#destroy
 #            login GET    /login(.:format)                session#new
 #                  POST   /login(.:format)                session#create
 #                  DELETE /login(.:format)                session#destroy
-#
+# 
 
 Rails.application.routes.draw do
 
+
+  # get 'companies/index'
+  #
+  # get 'companies/new'
+  #
+  # get 'companies/edit'
+  #
+  # get 'companies/show'
 
   root :to => "pages#home"
 
@@ -35,6 +50,7 @@ Rails.application.routes.draw do
 
   resources :jobs
   resources :technicians, :only => [:index, :new, :create, :edit, :update, :show]
+  resources :companies
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

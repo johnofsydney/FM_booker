@@ -12,4 +12,5 @@ class Company < ApplicationRecord
   has_many :bookers
   has_many :approvals
   has_many :jobs, :through => :bookers
+  has_many :technicians, :through => :approvals
 end
