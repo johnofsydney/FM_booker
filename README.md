@@ -60,9 +60,10 @@ API : googleMaps
 * Trapping some errors and redirecting to an error page with a flash message.
 * Trapping & preventing (some) navigation for user trying to view another users page.
 * Bootstrap made this the first presentable looking thing I've ever made.
+* git branching
 
 ## Things I learnt and would do differently
-* Not put too many CSS things in each class. Rather have more granular classes and then just add whichever ones you need to whatver element you're styling.
+* Not put too many CSS things in each class. Rather have more granular classes and then just add whichever ones you need to whatever element you're styling.
 
 
 ## Shortcomings / challenges not overcome

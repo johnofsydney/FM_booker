@@ -37,6 +37,7 @@ class TechniciansController < ApplicationController
       flash[:error] = "There are no jobs associated with that user."
       redirect_to pages_problem_path
     end
+    # This last bit not yet pushed to HEROKU. Whoops!
     if @technician.id != @current_user.id
       flash[:error] = "Thats not your page."
       redirect_to pages_problem_path
