@@ -1,30 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version: 2.4.2p198
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-# Well I don't really know how to answer the stuff above, so here's my read me below.
-
 
 ## Summary
 * This app is called FM_Booker. Which is a dull name for an unexciting app.
@@ -48,10 +23,10 @@ Things you may want to cover:
 
 
 ## gems and APIs
-gem 'cloudinary'
-gem 'pg_search'
-API : cloudinary
-API : googleMaps
+* gem 'cloudinary'
+* gem 'pg_search'
+* API : cloudinary
+* API : googleMaps
 
 
 ## Good stuff / challenges overcome
@@ -70,19 +45,13 @@ API : googleMaps
 * A booker can only be created by me in the console. Currently there is no way for a booker to edit their details.
 * A technician can be created by a booker. Currently there is no way for anyone to edit a technician details.
 * There is no way (outside the console) for bookers or technicians to be deleted. This is probably not a bad thing for a real world app of this kind. Probably better to obsolete them via some kind of boolean field than to delete the record entirely.
-
 * Google Map API is hardcoded (from before we discussed secrets).
-
-* The project was probably a bit too simple, and I didn't do any scraping / JSON / AJAX or whatevers.
 
 
 ## Where Next?
 * I think this is a saleable idea. I think real estate agents, fire services companies, etc could all use something like this.
 * I would start from scratch, and spend most of my thinking time getting the users models right.
 * I would add the following;
-** support for multiple photos (many to many with Jobs)
-** spare parts (many to many with jobs)
-** auto generate invoice for client
-
-## Questions
-Did anyone solve issue of password reset?
+.. * support for multiple photos (many to many with Jobs)
+.. * spare parts (many to many with jobs)
+.. * auto generate invoice for client

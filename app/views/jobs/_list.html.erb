@@ -36,12 +36,10 @@
     <!-- <div class="<%= class_words %>"> -->
       <ul>
         <h4><%= link_to job.summary, job %></h4>
-        <!-- <li>Info: <%= job.detail %></li> -->
         <li>Address: <%= job.address %></li>
         <li>Requested Date: <%= job.requested_date %></li>
         <li>Planned Date: <%= job.accepted_date %></li>
         <li>Completed Date: <%= job.date_completed %></li>
-        <!-- <li>Completed? <%= job.finished %></li> -->
         <li>Booker: <%= job.booker.name %></li>
 
         <% if job.technician_id.nil? %>
@@ -51,7 +49,6 @@
         <% end %>
 
       </ul>
-      <!-- <%= link_to "Edit Job", job %> -->
     </div>
 
 
