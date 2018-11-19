@@ -3,7 +3,8 @@
   <% if @current_user.present? %>
     <h1>Welcome to FM_Booker</h1>
     <h3>an unexciting database for booking service jobs.</h3>
-    <h3>You are logged in as <%= "#{ @current_user.name }" %> (<%= "#{ session[:user_type].capitalize}"%>) of <%= "#{ @current_user.company.name }" %></h3>
+    <h3>You are logged in as <%= "#{ @current_user.name }" %> (<%= "#{ session[:user_type].capitalize}"%>) of </h3>
+    <%# "#{ @current_user.company.name }" %>
 
     <p>All available actions are in the nav bar.</p>
 

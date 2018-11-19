@@ -43,7 +43,7 @@
   <% if @job.photo.nil? %>
   <% else %>
   <div class=" mt-1em ">
-    <%= image_tag(@job.photo, :class => 'img-rounded photo') unless @job.photo.nil? %>
+    <%= cl_image_tag(@job.photo, :class => 'img-rounded photo') unless @job.photo.nil? %>
   </div>
   <% end %>
 
